@@ -23,7 +23,7 @@ const firebaseConfig = {
 })
 export class MainComponent implements OnInit {
   login:boolean=true;
-  Uemail:string;
+  Uemail:string='0';
   form;
   ch:boolean = true;
   errore;
@@ -44,7 +44,6 @@ export class MainComponent implements OnInit {
         this.Uemail="";
       }
     })
-    document.getElementById('in').style.display ="inline"
   }
 
   logout(){

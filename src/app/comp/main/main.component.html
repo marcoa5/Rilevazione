@@ -1,5 +1,5 @@
 
-<div *ngIf="!Uemail" style="display: none;" id="in">
+<div *ngIf="!Uemail">
     <h1>Login</h1>
     <form [formGroup]="form" class="form">
         <mat-form-field appearance="fill">
@@ -21,7 +21,7 @@
       
    
 </div>
-<div *ngIf="Uemail">
+<div *ngIf="Uemail && Uemail !='0'">
     <mat-drawer-container class="container" [hasBackdrop]=true>
         <mat-drawer #drawer mode="over">I'm a drawer</mat-drawer>
         <mat-drawer-content>
