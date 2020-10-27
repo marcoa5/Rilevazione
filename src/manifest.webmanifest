@@ -1,8 +1,8 @@
 {
-  "name": "ttm",
-  "short_name": "ttm",
-  "theme_color": "ffcd00",
-  "background_color": "ffcd00",
+  "name": "TTM",
+  "short_name": "TTM",
+  "theme_color": "#ffcd00",
+  "background_color": "#ffcd00",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
