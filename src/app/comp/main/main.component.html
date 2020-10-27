@@ -11,7 +11,7 @@
         <mat-form-field appearance="fill">
             <mat-label>Password</mat-label>
             <input matInput formControlName="password" [type]="ch? 'password' : 'text'"  (keypress)="c($event)"  required >
-            </button><mat-icon matSuffix (click)="ch=!ch" style="cursor: pointer;">{{ch? 'visibility' : 'visibility_off'}}</mat-icon>
+            <mat-icon matSuffix (click)="ch=!ch" style="cursor: pointer;">{{ch? 'visibility' : 'visibility_off'}}</mat-icon>
             <mat-error *ngIf="form.hasError('minlength','password')">La password deve contenere almeno 6 caratteri</mat-error>
         </mat-form-field>
         <button class="loginbut" mat-raised-button color="primary" (click)="signin(form)">Login</button>
