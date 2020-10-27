@@ -1,5 +1,5 @@
 
-<div>
+<div *ngIf="!Uemail">
     <h1>Login</h1>
     <form [formGroup]="form" class="form">
         <mat-form-field appearance="fill">
@@ -32,9 +32,8 @@
                     </button>
                     <span>TTM</span>
                     <span class="example-spacer"></span>
-                    <button mat-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="logout()">
+                    <button mat-button class="example-icon favorite-icon" (click)="logout()">
                         <mat-icon>person</mat-icon>
-                        {{Uemail}}
                     </button>
                     
     

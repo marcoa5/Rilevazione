@@ -48,7 +48,6 @@ export class MainComponent implements OnInit {
 
   logout(){
     firebase.default.auth().signOut();
-    console.log(this.Uemail)
   }
 
   signin(a: FormGroup){
