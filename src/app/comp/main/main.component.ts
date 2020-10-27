@@ -41,9 +41,10 @@ export class MainComponent implements OnInit {
       if(user){
         this.Uemail = user.email;
       } else {
-        this.Uemail=""
+        this.Uemail="";
       }
     })
+    document.getElementById('in').style.display ="inline"
   }
 
   logout(){
