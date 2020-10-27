@@ -1,0 +1,59 @@
+.container {
+    position: absolute;
+    top:0; bottom:0; left:0; right:0;
+    max-width: 1200px;
+    height: 100%;
+    margin-left:auto; margin-right: auto;
+    box-shadow: 0 0 20px 0 black;
+  }
+  
+  mat-drawer-content {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: white;
+  }
+
+  mat-drawer{
+      min-width: 300px;
+  }
+
+.tb{
+    position: absolute;
+    top:0; left:0;
+    margin:0; padding:0;
+    width:100%;
+    box-shadow: 0 0 20px 0 black;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+    
+  }
+
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+form {
+    max-width: 500px;
+    margin: auto;
+}
+
+  mat-form-field{
+      width:100%;
+  }
+  h1{
+      text-align: center;
+  }
+
+  .loginbut{
+      width: 100%;
+  }
+  
