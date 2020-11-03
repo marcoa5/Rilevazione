@@ -36,14 +36,21 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     firebase.default.initializeApp(firebaseConfig);
-    firebase.default.auth().getRedirectResult().then(user=>{
-      if(user.user!=null){
-        console.log(user);
-        this.Uemail = user.user.displayName;
+    firebase.default.auth().onAuthStateChanged(user=>{
+      if(user!=null){
+        this.Uemail = user.displayName;
+        console.log(user)
       } else {
         this.logina();
       }
     })
+    /*firebase.default.auth().getRedirectResult().then(user=>{
+      if(user.user!=null){
+        this.Uemail = user.user.displayName;
+      } else {
+        this.logina();
+      }
+    })*/
   }
 
   logina(){
@@ -57,6 +64,7 @@ export class MainComponent implements OnInit {
 
   logout(){
     firebase.default.auth().signOut();
+    this.Uemail = '0'
   }
 
 
