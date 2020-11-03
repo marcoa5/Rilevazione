@@ -14,7 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +23,7 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule, MatSidenavModule, MatButtonModule, MatToolbarModule, MatIconModule,
     AppRoutingModule, MatInputModule, MatFormFieldModule, FormsModule, ReactiveFormsModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule, MatProgressSpinnerModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],

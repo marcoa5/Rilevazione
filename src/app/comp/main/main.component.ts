@@ -36,40 +36,31 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     firebase.default.initializeApp(firebaseConfig);
-    //firebase.default.auth().signInWithEmailAndPassword("marco.arato@epiroc.com", "marcoooo")
-    firebase.default.auth().onAuthStateChanged(user=>{
-      if(user){
-        this.Uemail = user.email;
+    firebase.default.auth().getRedirectResult().then(user=>{
+      if(user.user!=null){
+        console.log(user);
+        this.Uemail = user.user.displayName;
       } else {
-        this.Uemail="";
+        this.logina();
       }
     })
+  }
+
+  logina(){
+    let provider = new firebase.default.auth.OAuthProvider('microsoft.com');
+    provider.setCustomParameters({
+      prompt: 'consent',
+      tenant: '896ecbea-bd27-4a3c-a131-34aa0b46a086'
+    });
+    firebase.default.auth().signInWithRedirect(provider);
   }
 
   logout(){
     firebase.default.auth().signOut();
   }
 
-  signin(a: FormGroup){
-    firebase.default.auth().signInWithEmailAndPassword(a.get('email').value,a.get('password').value)
-    .then(()=>{
-      a.setValue({email:'',password:''});
-      this.errore="";
-    })
-    .catch(err=>{
-      if(err.code=="auth/user-not-found"){
-        this.errore = "Utente non trovato";
-      } else if(err.code=="auth/wrong-password"){
-        this.errore = "Password errata";
-      }
-    })
-  }
 
-  c(e){
-    if(e.key=="Enter"){
-      e.preventDefault();
-      this.signin(this.form);
-    }
-  }
+
+
 }
  

@@ -1,26 +1,8 @@
-
-<div *ngIf="!Uemail" class="container">
-    <h1 style="margin-top: 50px;">Login</h1>
-    <form [formGroup]="form" class="form">
-        <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email" (keypress)="c($event)" required>
-          <mat-error *ngIf="form.hasError('email','email') || form.hasError('email','required')">Inserisci un indirizzo email</mat-error>
-        </mat-form-field>
-        <br>
-        <mat-form-field appearance="outline">
-            <mat-label>Password</mat-label>
-            <input matInput formControlName="password" [type]="ch? 'password' : 'text'"  (keypress)="c($event)"  required >
-            <mat-icon matSuffix (click)="ch=!ch" style="cursor: pointer;">{{ch? 'visibility' : 'visibility_off'}}</mat-icon>
-            <mat-error *ngIf="form.hasError('minlength','password')">La password deve contenere almeno 6 caratteri</mat-error>
-        </mat-form-field>
-        <button class="loginbut" mat-raised-button color="primary" (click)="signin(form)">Login</button>
-        <br><br>
-        <mat-label style="color: red; text-align: center;">{{errore}}</mat-label>
-    </form>
-      
-   
+<div *ngIf="Uemail=='0'" class="spin">
+    <img src="../../../assets/logo.png" width="300px">
+    <mat-spinner color="accent" style="margin: 0 auto 0 auto;"></mat-spinner>
 </div>
+
 <div *ngIf="Uemail && Uemail !='0'">
     <mat-drawer-container class="container" [hasBackdrop]=true>
         <mat-drawer #drawer mode="over">I'm a drawer</mat-drawer>
