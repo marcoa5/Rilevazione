@@ -1,0 +1,12 @@
+<mat-card *ngFor="let item of elenco" color="primary" class="card"
+[ngStyle]="{'background-color':item.Ris === 'OK' ? 'green' : 'red' }">
+    <mat-chip-list class="example-chip" cdkDropList cdkDropListOrientation="horizontal">
+        <mat-chip
+            class="a"
+            cdkDrag>
+            <mat-icon>calendar_today</mat-icon>
+            <span style="margin-left:15px;">{{ item.Data }}</span>
+        </mat-chip>
+    </mat-chip-list>
+    
+</mat-card>

@@ -14,16 +14,26 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ButComponent } from './comp/but/but.component';
+import { ResComponent } from './comp/res/res.component';
+import { ExistComponent } from './comp/exist/exist.component';
+import { RilevazioniComponent } from './comp/rilevazioni/rilevazioni.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    MainComponent,
+    ButComponent,
+    ResComponent,
+    ExistComponent,
+    RilevazioniComponent
   ],
   imports: [
     BrowserModule, MatSidenavModule, MatButtonModule, MatToolbarModule, MatIconModule,
     AppRoutingModule, MatInputModule, MatFormFieldModule, FormsModule, ReactiveFormsModule,
-    BrowserAnimationsModule, MatProgressSpinnerModule,
+    BrowserAnimationsModule, MatProgressSpinnerModule, MatCardModule, MatChipsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],

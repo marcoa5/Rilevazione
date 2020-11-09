@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase/app';
 import "firebase/analytics";
 import 'firebase/auth';
+import 'firebase/database';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-
+import * as moment from 'moment';
+import { exit } from 'process';
+import { Router } from '@angular/router';
 
 const firebaseConfig = {
   apiKey: "AIzaSyByNcKM84Xlba7MyGke7jP9B_GuCSGltV4",
@@ -24,33 +27,40 @@ const firebaseConfig = {
 export class MainComponent implements OnInit {
   login:boolean=true;
   Uemail:string='0';
+  UId:string;
   form;
   ch:boolean = true;
   errore;
-  constructor(fb : FormBuilder) {
+  constructor(fb : FormBuilder, private router: Router) {
     this.form = fb.group({
       email: ['', [Validators.required,Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
-    })
+    });
+    firebase.default.initializeApp(firebaseConfig);
    }
 
-  ngOnInit(): void {
-    firebase.default.initializeApp(firebaseConfig);
+  ngOnInit() {
+
     firebase.default.auth().onAuthStateChanged(user=>{
       if(user!=null){
         this.Uemail = user.displayName;
-        console.log(user)
+        this.UId = user.uid;
       } else {
         this.logina();
       }
-    })
-    /*firebase.default.auth().getRedirectResult().then(user=>{
-      if(user.user!=null){
-        this.Uemail = user.user.displayName;
-      } else {
-        this.logina();
-      }
+    });
+
+    /*firebase.default.database().ref("rec").once('value').then(a=>{
+      
+      a.forEach(e=>{
+        e.forEach(f=>{
+          var d = moment(new Date()).format("YYYY-MM-DD");
+          var c = f.key.substring(0,10);
+          //if(c==d){this.router.navigate(['exist'])}
+        })
+      })
     })*/
+
   }
 
   logina(){
@@ -67,8 +77,13 @@ export class MainComponent implements OnInit {
     this.Uemail = '0'
   }
 
+  home(){
+    this.router.navigate([''])
+  }
+  
 
-
-
+  rile(){
+    this.router.navigate(['rile'])
+  }
 }
  
