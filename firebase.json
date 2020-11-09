@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "rilevazione-epi", 
     "public": "dist",
     "ignore": [
       "firebase.json",
