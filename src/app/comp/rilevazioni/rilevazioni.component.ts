@@ -10,6 +10,7 @@ import * as moment from 'moment';
 export class RilevazioniComponent implements OnInit {
 Uemail:string;
 elenco=[];
+day:string;
   constructor() { }
 
   ngOnInit(): void {
@@ -33,4 +34,8 @@ elenco=[];
     })
   }
 
+  giorno(a){
+    this.day=moment(a).locale('IT').format("dddd") + '\t' + moment(a).locale('IT').format("LL")
+    return this.day
+  }
 }

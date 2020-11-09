@@ -4,7 +4,7 @@
         <mat-chip class="sin"
         [ngStyle]="{'color':item.Ris === 'OK' ? 'green' : 'red' }">
             <span><mat-icon>calendar_today</mat-icon></span>
-            <span style="margin-left: 20px;">{{ item.Data }}</span>
+            <span style="margin-left: 20px;">{{ giorno(item.Data) }}</span>
         </mat-chip>
     </mat-chip-list>  
     </p>
