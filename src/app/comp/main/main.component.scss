@@ -69,6 +69,12 @@
   .menuitem {
     color: $light-text;
     cursor: pointer;
+    font-size: 20px;
+    margin-top: 35px;
+  }
+
+  .menuitem:hover {
+    color: rgba($light-primary-text, 0.5);
   }
 
   .menu {
