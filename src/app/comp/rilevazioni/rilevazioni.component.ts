@@ -35,7 +35,7 @@ day:string;
   }
 
   giorno(a){
-    this.day=moment(a).locale('IT').format("dddd") + '\t' + moment(a).locale('IT').format("LL")
+    this.day=moment(a).locale('IT').format("LL")
     return this.day
   }
 }
