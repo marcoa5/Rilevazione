@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './comp/main/main.component';
@@ -22,6 +21,8 @@ import { RilevazioniComponent } from './comp/rilevazioni/rilevazioni.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -33,8 +34,8 @@ import { MatListModule } from '@angular/material/list';
     RilevazioniComponent
   ],
   imports: [
-    BrowserModule, MatSidenavModule, MatButtonModule, MatToolbarModule, MatIconModule,
-    AppRoutingModule, MatInputModule, MatFormFieldModule, FormsModule, ReactiveFormsModule,
+    BrowserModule, MatSidenavModule, MatButtonModule, MatToolbarModule, MatIconModule, MatNativeDateModule,
+    AppRoutingModule, MatInputModule, MatFormFieldModule, FormsModule, ReactiveFormsModule, MatDatepickerModule,
     BrowserAnimationsModule, MatProgressSpinnerModule, MatCardModule, MatChipsModule, MatListModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],

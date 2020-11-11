@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase/app';
-import "firebase/analytics";
-import 'firebase/auth';
+import firebase from 'firebase/app';
 import 'firebase/database';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
-import { exit } from 'process';
 import { Router } from '@angular/router';
 
 const firebaseConfig = {
@@ -37,7 +34,7 @@ export class MainComponent implements OnInit {
       email: ['', [Validators.required,Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
-    firebase.default.initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
    }
 
   ngOnInit() {
@@ -46,16 +43,16 @@ export class MainComponent implements OnInit {
   }
 
   logina(){
-    let provider = new firebase.default.auth.OAuthProvider('microsoft.com');
+    let provider = new firebase.auth.OAuthProvider('microsoft.com');
     provider.setCustomParameters({
       prompt: 'consent',
       tenant: '896ecbea-bd27-4a3c-a131-34aa0b46a086'
     });
-    firebase.default.auth().signInWithRedirect(provider);
+    firebase.auth().signInWithRedirect(provider);
   }
 
   logout(){
-    firebase.default.auth().signOut();
+    firebase.auth().signOut();
     this.Uemail = '0'
   }
 
@@ -74,17 +71,19 @@ export class MainComponent implements OnInit {
   }
 
   cont_rec(){
-    firebase.default.auth().onAuthStateChanged(user=>{
+    firebase.auth().onAuthStateChanged(user=>{
       if(user!=null){
         this.Uemail = user.displayName;
         this.UId = user.uid;
-        var ref = firebase.default.database().ref('presenze/ch/' + moment(new Date()).format('YYYYMMDD') + '/');
+        var ref = firebase.database().ref('presenze/ch/' + moment(new Date()).format('YYYYMMDD') + '/');
         ref.once('value', (a)=>{
           a.forEach(b=>{
             if(b.key==this.Uemail){this.ver=1;}
           })
         }).finally(()=>{if(this.ver!=1){this.ver=2}}
         )
+      } else {
+        this.logina();
       }
     })
   }

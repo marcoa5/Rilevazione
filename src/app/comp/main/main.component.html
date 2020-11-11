@@ -5,29 +5,43 @@
 
 <div *ngIf="Uemail && Uemail !='0'">
     <mat-drawer-container class="container" [hasBackdrop]=true>
-        <mat-drawer #drawer mode="over" style="background-color: #425563;">
+        <mat-drawer #drawer mode="push" style="background-color: #425563;">
             <div class="menu">
-                <p class="menuitem" (click)="home(); drawer.toggle();">Home Page</p>
-                <p class="menuitem" (click)="rile(); drawer.toggle();">Elenco Rilevazioni</p>
+                <p class="menuitem" (click)="home(); drawer.toggle()">Home Page</p>
+                <p class="menuitem" (click)="rile(); drawer.close()">Elenco Rilevazioni</p>
             </div>
         </mat-drawer>
         <mat-drawer-content>
             <p class="tb">
                 <mat-toolbar color="primary">
-                    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
-                        <mat-icon>menu</mat-icon>
-                    </button>
-                    <span>Temperatura</span>
-                    <span class="example-spacer"></span>
-                    <button mat-button class="example-icon favorite-icon" (click)="logout()">
-                        <mat-icon>person</mat-icon>
-                        {{ Uemail }}
-                    </button>
-                    
-    
+                    <mat-toolbar-row>
+                        <button mat-icon-button class="example-icon" (click)="drawer.toggle()">
+                            <mat-icon>menu</mat-icon>
+                        </button>
+                        <span>Temperatura</span>
+                        <span class="example-spacer"></span>
+                        <button mat-button class="example-icon favorite-icon" (click)="logout()">
+                            <mat-icon>person</mat-icon>
+                            {{ Uemail }}
+                        </button>
+                    </mat-toolbar-row>
+                    <mat-toolbar-row  *ngIf="ver==3">
+                        <span>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Enter a date range</mat-label>
+                                <mat-date-range-input [rangePicker]="picker">
+                                  <input matStartDate placeholder="Start date">
+                                  <input matEndDate placeholder="End date">
+                                </mat-date-range-input>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-date-range-picker #picker></mat-date-range-picker>
+                              </mat-form-field>
+                        </span>
+                    </mat-toolbar-row>
+
                 </mat-toolbar>
             </p>
-            <div style="margin-top: 80px;"></div>
+            <div [ngStyle]="{'margin-top':ver===3? '140px': '80px'}"></div>
             <ttm-but *ngIf="ver==2" (newE)="cambiaVer($event)"></ttm-but>
             <ttm-exist *ngIf="ver==1"></ttm-exist>
             <ttm-rilevazioni [email]="Uemail" *ngIf="ver==3"></ttm-rilevazioni>
