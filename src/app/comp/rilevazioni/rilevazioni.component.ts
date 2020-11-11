@@ -10,16 +10,22 @@ import * as moment from 'moment';
 export class RilevazioniComponent implements OnInit {
 elenco=[];
 day:string;
+visual:boolean;
 @Input() email:string; 
   constructor() { }
 
   ngOnInit(): void {
+    this.visual=false;
     var ref = firebase.default.database().ref('presenze/rec/' + this.email +'/')
     ref.once('value').then((a)=>{
       a.forEach(b=>{
-        this.elenco.push({Data: moment(b.key.substring(0,11)).locale('IT').format('LL'), Nome: a.key, Ris:b.val().ris})
-        console.log(this.elenco)
+        this.elenco.push({Data: moment(b.key.substring(0,11)).locale('IT').format('LL'), Nome: a.key, Ris:b.val().ris});
       })
     })
+    setTimeout(()=>{
+      this.elenco.reverse();
+      this.visual=true;
+    },2000)
   }
+
 }
