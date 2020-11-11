@@ -21,6 +21,8 @@ import { ExistComponent } from './comp/exist/exist.component';
 import { RilevazioniComponent } from './comp/rilevazioni/rilevazioni.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatListModule } from '@angular/material/list';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +35,7 @@ import { MatChipsModule } from '@angular/material/chips';
   imports: [
     BrowserModule, MatSidenavModule, MatButtonModule, MatToolbarModule, MatIconModule,
     AppRoutingModule, MatInputModule, MatFormFieldModule, FormsModule, ReactiveFormsModule,
-    BrowserAnimationsModule, MatProgressSpinnerModule, MatCardModule, MatChipsModule,
+    BrowserAnimationsModule, MatProgressSpinnerModule, MatCardModule, MatChipsModule, MatListModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],

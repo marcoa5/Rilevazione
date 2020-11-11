@@ -28,6 +28,10 @@
                 </mat-toolbar>
             </p>
             <div style="margin-top: 80px;"></div>
+            <ttm-but *ngIf="ver==2" (newE)="cambiaVer($event)"></ttm-but>
+            <ttm-exist *ngIf="ver==1"></ttm-exist>
+            <ttm-rilevazioni [email]="Uemail" *ngIf="ver==3"></ttm-rilevazioni>
+            <ttm-res *ngIf="ver==4"></ttm-res>
             <router-outlet></router-outlet>
         </mat-drawer-content>
     </mat-drawer-container>

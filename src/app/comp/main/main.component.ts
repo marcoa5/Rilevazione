@@ -31,6 +31,7 @@ export class MainComponent implements OnInit {
   form;
   ch:boolean = true;
   errore;
+  ver;
   constructor(fb : FormBuilder, private router: Router) {
     this.form = fb.group({
       email: ['', [Validators.required,Validators.email]],
@@ -40,27 +41,8 @@ export class MainComponent implements OnInit {
    }
 
   ngOnInit() {
-
-    firebase.default.auth().onAuthStateChanged(user=>{
-      if(user!=null){
-        this.Uemail = user.displayName;
-        this.UId = user.uid;
-      } else {
-        this.logina();
-      }
-    });
-
-    /*firebase.default.database().ref("rec").once('value').then(a=>{
-      
-      a.forEach(e=>{
-        e.forEach(f=>{
-          var d = moment(new Date()).format("YYYY-MM-DD");
-          var c = f.key.substring(0,10);
-          //if(c==d){this.router.navigate(['exist'])}
-        })
-      })
-    })*/
-
+    window.onresize = (a)=>{console.log(this.getOrientation())}
+    this.cont_rec()
   }
 
   logina(){
@@ -78,12 +60,37 @@ export class MainComponent implements OnInit {
   }
 
   home(){
-    this.router.navigate([''])
+    this.ver=0;
+    this.cont_rec()
   }
   
-
   rile(){
-    this.router.navigate(['rile'])
+    this.ver=3;
+  }
+  
+  getOrientation(){
+    var orientation = window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
+    return orientation;
+  }
+
+  cont_rec(){
+    firebase.default.auth().onAuthStateChanged(user=>{
+      if(user!=null){
+        this.Uemail = user.displayName;
+        this.UId = user.uid;
+        var ref = firebase.default.database().ref('presenze/ch/' + moment(new Date()).format('YYYYMMDD') + '/');
+        ref.once('value', (a)=>{
+          a.forEach(b=>{
+            if(b.key==this.Uemail){this.ver=1;}
+          })
+        }).finally(()=>{if(this.ver!=1){this.ver=2}}
+        )
+      }
+    })
+  }
+
+  cambiaVer(e){
+    this.ver=4;
   }
 }
  

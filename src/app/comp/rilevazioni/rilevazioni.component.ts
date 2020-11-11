@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import * as moment from 'moment';
 
@@ -8,34 +8,18 @@ import * as moment from 'moment';
   styleUrls: ['./rilevazioni.component.scss']
 })
 export class RilevazioniComponent implements OnInit {
-Uemail:string;
 elenco=[];
 day:string;
+@Input() email:string; 
   constructor() { }
 
   ngOnInit(): void {
-    firebase.default.auth().onAuthStateChanged(user=>{
-      if(user!=null){
-        this.Uemail = user.displayName;
-      }
-    });
-    var ref = firebase.default.database().ref('presenze/ch/');
-    ref.orderByKey().once('value', a=>{
+    var ref = firebase.default.database().ref('presenze/rec/' + this.email +'/')
+    ref.once('value').then((a)=>{
       a.forEach(b=>{
-        b.forEach(c=>{
-          c.forEach(d=>{
-            if(c.key==this.Uemail){
-              this.elenco.push({Nome: c.key, Data: moment(b.key).format("DD/MM/YYYY"), Ris: d.val()});
-            }
-          })
-          
-        })
+        this.elenco.push({Data: moment(b.key.substring(0,11)).locale('IT').format('LL'), Nome: a.key, Ris:b.val().ris})
+        console.log(this.elenco)
       })
     })
-  }
-
-  giorno(a){
-    this.day=moment(a).locale('IT').format("LL")
-    return this.day
   }
 }

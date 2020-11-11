@@ -1,13 +1,12 @@
 <div>
-    <p class="p">
-      <mat-chip-list class="chip" cdkDropList cdkDropListOrientation="horizontal" *ngFor="let item of elenco">
-        <mat-chip class="sin"
-        [ngStyle]="{'color':item.Ris === 'OK' ? 'green' : 'red' }">
-            <span><mat-icon>calendar_today</mat-icon></span>
-            <span style="margin-left: 20px;">{{ giorno(item.Data) }}</span>
-        </mat-chip>
-    </mat-chip-list>  
-    </p>
+    <mat-list>
+        <mat-list-item *ngFor="let item of elenco" [ngStyle]="{'color':item.Ris==='OK'? 'green' : 'red' }">
+          <mat-icon mat-list-icon >calendar_today</mat-icon>
+          <div mat-line>{{item.Data}}</div>
+          <div mat-line> {{item.Nome}} </div>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
     
 </div>
 

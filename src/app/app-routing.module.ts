@@ -8,7 +8,7 @@ import { RilevazioniComponent } from './comp/rilevazioni/rilevazioni.component';
 
 
 const routes: Routes = [
-  {path:'', component: ButComponent},
+  
   {path:'res', component: ResComponent},
   {path:'exist', component: ExistComponent},
   {path:'rile', component: RilevazioniComponent},
