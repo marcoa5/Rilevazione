@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import firebase from 'firebase/app';
 import 'firebase/database';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder, FormControl } from '@angular/forms';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
 
@@ -29,6 +29,9 @@ export class MainComponent implements OnInit {
   ch:boolean = true;
   errore;
   ver;
+  inizio;
+  d1; d2;
+  fine; osp; us; tod;
   constructor(fb : FormBuilder, private router: Router) {
     this.form = fb.group({
       email: ['', [Validators.required,Validators.email]],
@@ -38,8 +41,14 @@ export class MainComponent implements OnInit {
    }
 
   ngOnInit() {
-    window.onresize = (a)=>{console.log(this.getOrientation())}
+    this.tod=new Date();
     this.cont_rec()
+    var i =  new Date(moment(new Date()).add(-7,'days').format('LL'));
+    var f = new Date();
+    this.d2 = new FormControl(f);
+    this.d1 = new FormControl(i);
+    this.inizio=i;
+    this.fine=f;
   }
 
   logina(){
@@ -58,6 +67,7 @@ export class MainComponent implements OnInit {
 
   home(){
     this.ver=0;
+    this.us=this.Uemail;
     this.cont_rec()
   }
   
@@ -69,11 +79,17 @@ export class MainComponent implements OnInit {
     var orientation = window.innerWidth > window.innerHeight ? "Landscape" : "Portrait";
     return orientation;
   }
+  guest(){
+    this.us="";
+    this.ver=2;
+    this.osp='1';
+  }
 
   cont_rec(){
     firebase.auth().onAuthStateChanged(user=>{
       if(user!=null){
         this.Uemail = user.displayName;
+        this.us=user.displayName;
         this.UId = user.uid;
         var ref = firebase.database().ref('presenze/ch/' + moment(new Date()).format('YYYYMMDD') + '/');
         ref.once('value', (a)=>{

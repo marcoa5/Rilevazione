@@ -9,6 +9,7 @@
             <div class="menu">
                 <p class="menuitem" (click)="home(); drawer.toggle()">Home Page</p>
                 <p class="menuitem" (click)="rile(); drawer.close()">Elenco Rilevazioni</p>
+                <p class="menuitem" (click)="guest(); drawer.close()">Registra Ospite</p>
             </div>
         </mat-drawer>
         <mat-drawer-content>
@@ -26,25 +27,23 @@
                         </button>
                     </mat-toolbar-row>
                     <mat-toolbar-row  *ngIf="ver==3">
-                        <span>
-                            <mat-form-field appearance="fill">
-                                <mat-label>Enter a date range</mat-label>
-                                <mat-date-range-input [rangePicker]="picker">
-                                  <input matStartDate placeholder="Start date">
-                                  <input matEndDate placeholder="End date">
-                                </mat-date-range-input>
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-date-range-picker #picker></mat-date-range-picker>
-                              </mat-form-field>
-                        </span>
+                        <mat-form-field appearance="legacy" style="font-size: smaller;" style="width:100%; font-size: 75%;">
+                            <mat-label>Inserire il periodo</mat-label>
+                            <mat-date-range-input [rangePicker]="picker">
+                                <input matStartDate [formControl]="d1" placeholder="Inizio" (dateInput)="inizio=$event.value" (dateChange)="fine=$event.value">
+                                <input matEndDate  [formControl]="d2" placeholder="Fine" (dateInput)="fine=$event.value" (dateChange)="fine=$event.value">
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker touchUi></mat-date-range-picker>
+                        </mat-form-field>
                     </mat-toolbar-row>
 
                 </mat-toolbar>
             </p>
             <div [ngStyle]="{'margin-top':ver===3? '140px': '80px'}"></div>
-            <ttm-but *ngIf="ver==2" (newE)="cambiaVer($event)"></ttm-but>
+            <ttm-but [osp]="osp" [Uemail]="us" *ngIf="ver==2" (newE)="cambiaVer($event)"></ttm-but>
             <ttm-exist *ngIf="ver==1"></ttm-exist>
-            <ttm-rilevazioni [email]="Uemail" *ngIf="ver==3"></ttm-rilevazioni>
+            <ttm-rilevazioni [email]="Uemail" [inizio]="inizio" [fine]="fine" *ngIf="ver==3"></ttm-rilevazioni>
             <ttm-res *ngIf="ver==4"></ttm-res>
             <router-outlet></router-outlet>
         </mat-drawer-content>

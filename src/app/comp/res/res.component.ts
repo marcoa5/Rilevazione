@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'ttm-res',
@@ -9,15 +7,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./res.component.scss']
 })
 export class ResComponent implements OnInit {
-Uemail:string;
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
-    firebase.auth().onAuthStateChanged(user=>{
-      if(user!=null){
-        this.Uemail = user.displayName;
-      }
-    });
+    
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import firebase from 'firebase/app';
@@ -11,19 +11,29 @@ import 'firebase/database';
   styleUrls: ['./but.component.scss']
 })
 export class ButComponent implements OnInit {
-Uemail:string;
+
 UId: string;
-ver=0;
+ver=0; _Uemail; _osp;
+@Input()
+get osp(){
+  return this._osp;
+}
+set osp(osp:string){
+  this._osp=osp;
+}
+@Input() 
+get Uemail(){
+  return this._Uemail;
+}
+set Uemail(Uemail:string){
+  this._Uemail=Uemail;
+}
 @Output() newE=new EventEmitter<string>();
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    firebase.auth().onAuthStateChanged(user=>{
-      if(user!=null){
-        this.Uemail = user.displayName;
-      }
-    })
+    
   }
 
   
@@ -33,7 +43,7 @@ ver=0;
     var data = moment(new Date()).format("YYYY-MM-DD - HH:mm:ss");
     var datashort =  moment(new Date()).format("YYYYMMDD")
     var db = firebase.database();
-    db.ref("presenze/rec/" +  this.Uemail + "/" + data).set({ris: a})
+    db.ref("presenze/rec/" +  this._Uemail + "/" + data).set({ris: a, data:datashort})
     .then(()=>{
       this.newE.emit(a)
     })
@@ -48,5 +58,7 @@ ver=0;
     return orientation;
   }
 
-
+a(b){
+  if(!this.Uemail){this.Uemail = b}
+}
 }

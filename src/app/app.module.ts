@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './comp/main/main.component';
@@ -22,7 +22,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
+import {MatNativeDateModule, MAT_DATE_LOCALE} from '@angular/material/core';
+import { GuestComponent } from './comp/guest/guest.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {MatNativeDateModule} from '@angular/material/core';
     ButComponent,
     ResComponent,
     ExistComponent,
-    RilevazioniComponent
+    RilevazioniComponent,
+    GuestComponent
   ],
   imports: [
     BrowserModule, MatSidenavModule, MatButtonModule, MatToolbarModule, MatIconModule, MatNativeDateModule,
@@ -39,7 +41,9 @@ import {MatNativeDateModule} from '@angular/material/core';
     BrowserAnimationsModule, MatProgressSpinnerModule, MatCardModule, MatChipsModule, MatListModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'it-IT'},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
