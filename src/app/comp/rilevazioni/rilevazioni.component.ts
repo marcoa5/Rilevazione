@@ -3,6 +3,12 @@ import firebase from 'firebase';
 import 'firebase/database';
 import * as moment from 'moment';
 
+export interface eleP{
+  Data: string;
+  Nome: string;
+  Ris: string;
+}
+
 @Component({
   selector: 'ttm-rilevazioni',
   templateUrl: './rilevazioni.component.html',
@@ -38,15 +44,22 @@ set fine(fine:number){
   leggi(){
     this.visual=false;
     this.elenco=[];
-    if(this._inizio && this._fine){
+    if(this.inizio && this.fine){
       var ref = firebase.database().ref('presenze/rec/' + this.email)
-    ref.orderByChild('data').startAt(this._inizio).endAt(this._fine).once('value').then((a)=>{
+      ref.orderByChild('data').startAt(this.inizio).endAt(this.fine).once('value').then((a)=>{
+        
       a.forEach(b=>{
-        this.elenco.push({Data: moment(b.key.substring(0,10)).locale('IT').format('LL'), Nome: a.key, Ris:b.val().ris, D: b.val().data});
+        var item1: eleP={
+          Data: moment(b.key.substring(0,10)).locale('IT').format('LL'),
+          Nome: a.key,
+          Ris: b.val().ris
+        }
+        this.elenco.push(item1);
       })
     })
     setTimeout(()=>{
       this.visual=true;
+      this.elenco.reverse();
     },1200)
     }
   }

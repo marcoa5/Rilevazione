@@ -1,7 +1,8 @@
 <form>
-    <mat-form-field style="width: 100%;" appearance="fill">
+    <mat-form-field style="width: 100%;" appearance="legacy">
       <mat-label>Nome e Cognome</mat-label>
       <input matInput type="text" #txtbox [formControl]="nomeFC" placeholder="Nome Cognome" style="width: 100%;" (change)="c($event)" required>
       <mat-error *ngIf="nomeFC.hasError('required')">Errore</mat-error>
+      <mat-error *ngIf="nomeFC.hasError('pattern')">Carattere non ammesso</mat-error>
     </mat-form-field>
 </form>  

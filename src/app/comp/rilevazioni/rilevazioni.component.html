@@ -1,7 +1,11 @@
 <div *ngIf="!visual">
   <mat-spinner color="accent" style="margin: 0 auto 0 auto;" diameter="80"></mat-spinner>
 </div>
-<div *ngIf="visual">
+<div *ngIf="visual && elenco.length==0">
+  <h2>Nessun dato da visualizzare</h2>
+</div>
+<div *ngIf="visual && elenco.length>0">
+  <h2>Elenco rilevazioni di {{email}}</h2>
     <mat-list>
         <mat-list-item *ngFor="let item of elenco" [ngStyle]="{'color':item.Ris==='OK'? 'green' : 'red' }">
           <mat-icon mat-list-icon >calendar_today</mat-icon>

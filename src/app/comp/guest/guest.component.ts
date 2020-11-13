@@ -9,16 +9,21 @@ import { FormControl, Validators } from '@angular/forms';
 export class GuestComponent implements OnInit {
   
   @Output() rrr= new EventEmitter();
-  
+  @Output() er = new EventEmitter();
   constructor() { }
   
   ngOnInit(): void {
   }
   nomeFC = new FormControl('',[
-      Validators.required,
+      Validators.required, Validators.pattern('[a-zA-Z_ ]{2,}')
     ])
 
   c(a){
-    this.rrr.emit(a.target.value)
+    this.rrr.emit(a.target.value);
+    if(this.nomeFC.hasError('pattern') ||this.nomeFC.hasError('required')){
+      this.er.emit(1)
+    } else {
+      this.er.emit(0)
+    }
   }
 }
